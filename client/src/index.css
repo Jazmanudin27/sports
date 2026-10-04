@@ -2443,5 +2443,599 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; margin-top: 60px;
   color: #0f172a;
 }
 
+/* ========================================================
+   MENU LAPANGAN (DAFTAR LAPANGAN) BERGAYA ALFAGIFT
+   - Header Biru Royal Menawan
+   - Subheader Tabs: Populer & Favorit
+   - Carousel Rekomendasi + Tombol + Booking
+   - Grid 4 Kolom Kategori Olahraga
+   - Card Venue Terdekat & Filter Chip
+   ======================================================== */
+
+.alfa-venues-page-wrapper {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* 1. Header Biru Daftar Lapangan */
+.alfa-venues-header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--theme-primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.alfa-venues-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  color: #ffffff;
+}
+
+.alfa-venues-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alfa-back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.alfa-back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-2px);
+}
+
+.alfa-venues-page-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.alfa-venues-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alfa-icon-action-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all .2s ease;
+}
+
+.alfa-icon-action-btn:hover, .alfa-icon-action-btn.active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.alfa-cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #ffffff;
+}
+
+/* Search Bar Toggle */
+.alfa-venues-search-bar {
+  padding: 0 16px 12px;
+}
+
+.alfa-venues-search-inner {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alfa-venues-search-inner .search-icon {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.alfa-venues-search-inner input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: #1e293b;
+  background: transparent;
+}
+
+.clear-search-btn {
+  background: #f1f5f9;
+  border: none;
+  color: #64748b;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* 2. Subheader Tabs (Putih dengan Underline Aktif) */
+.alfa-venues-subtabs {
+  display: flex;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.alfa-subtab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 8px;
+  background: transparent;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: all .2s ease;
+}
+
+.alfa-subtab-btn.active {
+  color: var(--theme-primary);
+  font-weight: 800;
+}
+
+.subtab-active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  right: 15%;
+  height: 3px;
+  background: var(--theme-primary);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.subtab-icon {
+  font-size: 1.05rem;
+}
+
+/* 3. Section Rekomendasi Untuk Kamu */
+.alfa-venues-body {
+  padding: 16px 14px 90px;
+}
+
+.alfa-recom-section {
+  margin-bottom: 24px;
+}
+
+.alfa-recom-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.alfa-recom-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.alfa-section-sub {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.alfa-see-all-link-btn {
+  background: none;
+  border: none;
+  color: var(--theme-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: opacity .2s ease;
+}
+
+.alfa-see-all-link-btn:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Horizontal Scroll Produk Lapangan */
+.alfa-recom-horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.alfa-recom-horizontal-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.alfa-recom-horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Card Produk Lapangan ala Alfagift */
+.alfa-court-product-card {
+  flex: 0 0 162px;
+  width: 162px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  scroll-snap-align: start;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.alfa-court-product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.alfa-court-card-media {
+  position: relative;
+  height: 124px;
+  width: 100%;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.alfa-court-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+.alfa-court-product-card:hover .alfa-court-img {
+  transform: scale(1.05);
+}
+
+.alfa-card-fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all .2s ease;
+}
+
+.alfa-card-fav-btn:hover {
+  transform: scale(1.15);
+}
+
+.alfa-card-fav-btn.is-fav {
+  background: #ffffff;
+}
+
+.alfa-court-spec-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 10px 8px 4px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alfa-court-card-body {
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.alfa-court-title-link {
+  text-decoration: none;
+}
+
+.alfa-court-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.25;
+  margin: 0 0 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 33px;
+}
+
+.alfa-court-venue-sub {
+  font-size: 0.68rem;
+  color: #64748b;
+  margin: 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alfa-court-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-bottom: 5px;
+}
+
+.alfa-court-price-val {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.alfa-court-price-unit {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.alfa-instant-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.flash-icon {
+  font-size: 0.72rem;
+}
+
+.alfa-btn-add-booking {
+  display: block;
+  text-align: center;
+  background: var(--theme-primary);
+  color: #ffffff;
+  padding: 7px 0;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: auto;
+  box-shadow: 0 3px 8px rgba(0, 86, 251, 0.25);
+  transition: all .2s ease;
+}
+
+.alfa-btn-add-booking:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* 4. Section Kategori 4 Kolom */
+.alfa-categories-browser-section {
+  margin-bottom: 24px;
+}
+
+.alfa-categories-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px 8px;
+}
+
+.alfa-category-tile-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.alfa-category-tile-btn:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.alfa-category-tile-btn.selected {
+  border-color: var(--theme-primary);
+  background: #f0f7ff;
+  box-shadow: 0 0 0 2px rgba(0, 86, 251, 0.15);
+}
+
+.alfa-category-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  transition: transform .2s ease;
+}
+
+.alfa-category-tile-btn:hover .alfa-category-icon-box {
+  transform: scale(1.08);
+}
+
+.cat-icon-emoji {
+  font-size: 1.7rem;
+}
+
+.alfa-category-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* 5. Section Semua Sport Center & Filter Chip */
+.alfa-all-venues-section {
+  margin-bottom: 20px;
+}
+
+.alfa-filter-chips-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.alfa-filter-chip {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.alfa-filter-chip:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.alfa-filter-chip.active {
+  background: var(--theme-primary);
+  color: #ffffff;
+  border-color: var(--theme-primary);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 86, 251, 0.25);
+}
+
+.alfa-venues-listing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Tab Favorit Grid */
+.alfa-fav-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.fav-card-item {
+  width: 100% !important;
+  flex: none !important;
+}
+
+/* Empty State Box */
+.alfa-empty-state-box {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+  padding: 36px 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.alfa-empty-state-box .empty-icon {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.alfa-empty-state-box h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.alfa-btn-reset-filter {
+  display: inline-block;
+  margin-top: 16px;
+  background: var(--theme-primary);
+  color: #ffffff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.alfa-btn-reset-filter:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* Sembunyikan Header Desktop "ArenaKu" dan Footer di Tampilan Mobile */
+@media (max-width: 768px) {
+  header.nav {
+    display: none !important;
+  }
+}
+
 
 

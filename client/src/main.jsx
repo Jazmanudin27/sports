@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import './index.css';
 import { AppProvider, useApp } from './lib.jsx';
 
@@ -21,18 +21,25 @@ import { AdminLayout, Bookings, Companies, Courts, Dashboard, Finance, Users } f
 
 /**
  * Public Layout:
- * Memiliki Navbar atas (desktop), konten utama, Footer, dan Bottom Navigation Bar (Android Mobile).
+ * Pada halaman Beranda (/) dan Menu Lapangan (/venues), header desktop "ArenaKu"
+ * disembunyikan agar tampilan full Alfagift Mobile yang modern dan rapi.
  */
-const PublicLayout = () => (
-  <div className="app-shell-public">
-    <Navbar />
-    <div className="main-content-container">
-      <Outlet />
+const PublicLayout = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const isVenues = location.pathname === '/venues';
+
+  return (
+    <div className="app-shell-public">
+      {!isHome && !isVenues && <Navbar />}
+      <div className="main-content-container">
+        <Outlet />
+      </div>
+      {!isHome && !isVenues && <Footer />}
+      <BottomNav />
     </div>
-    <Footer />
-    <BottomNav />
-  </div>
-);
+  );
+};
 
 function RequireAuth({ children }) {
   const { user, ready } = useApp();
