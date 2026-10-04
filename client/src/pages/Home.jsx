@@ -7,7 +7,6 @@ import AlfagiftMemberCard from '../components/home/AlfagiftMemberCard.jsx';
 import AlfagiftPromoBanner from '../components/home/AlfagiftPromoBanner.jsx';
 import AlfagiftCategoryGrid from '../components/home/AlfagiftCategoryGrid.jsx';
 import BookingHistorySection from '../components/home/BookingHistorySection.jsx';
-import AlfagiftStickyToast from '../components/home/AlfagiftStickyToast.jsx';
 
 /**
  * Halaman Utama (Beranda) — Versi Alfagift Mobile Pro
@@ -86,9 +85,6 @@ export function Home() {
           />
         )}
       </div>
-
-      {/* 6. Banner Sticky Melayang di Atas Navigasi Bawah */}
-      <AlfagiftStickyToast />
     </div>
   );
 }
