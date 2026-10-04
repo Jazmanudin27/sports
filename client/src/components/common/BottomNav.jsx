@@ -36,15 +36,6 @@ export function BottomNav() {
           <span className="tab-text">Lapangan</span>
         </NavLink>
 
-        {/* 3. Promo */}
-        <NavLink 
-          to="/venues?promo=true" 
-          className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
-        >
-          <span className="tab-glyph">🏷️</span>
-          <span className="tab-text">Promo</span>
-        </NavLink>
-
         {/* 4. Pesanan / Booking */}
         <NavLink 
           to="/my-bookings" 
