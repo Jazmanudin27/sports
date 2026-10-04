@@ -3,10 +3,36 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './index.css';
 import { AppProvider, useApp } from './lib.jsx';
-import { AuthPage, Footer, Home, MyBookings, Navbar, VenueDetail, Venues } from './pages/Public.jsx';
+
+// Shared Components
+import Navbar from './components/common/Navbar.jsx';
+import Footer from './components/common/Footer.jsx';
+import BottomNav from './components/common/BottomNav.jsx';
+
+// Public & Member Pages
+import Home from './pages/Home.jsx';
+import Venues from './pages/Venues.jsx';
+import VenueDetail from './pages/VenueDetail.jsx';
+import MyBookings from './pages/MyBookings.jsx';
+import AuthPage from './pages/Auth.jsx';
+
+// Admin Pages
 import { AdminLayout, Bookings, Companies, Courts, Dashboard, Finance, Users } from './pages/Admin.jsx';
 
-const PublicLayout = () => (<><Navbar /><Outlet /><Footer /></>);
+/**
+ * Public Layout:
+ * Memiliki Navbar atas (desktop), konten utama, Footer, dan Bottom Navigation Bar (Android Mobile).
+ */
+const PublicLayout = () => (
+  <div className="app-shell-public">
+    <Navbar />
+    <div className="main-content-container">
+      <Outlet />
+    </div>
+    <Footer />
+    <BottomNav />
+  </div>
+);
 
 function RequireAuth({ children }) {
   const { user, ready } = useApp();

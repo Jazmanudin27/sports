@@ -202,3 +202,876 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; margin-top: 60px;
   .admin-main { padding: 20px 16px; }
   .nav-links a:not(.btn) { display: none; }
 }
+
+/* =========================================================
+   ANDROID MOBILE EXPERIENCE (BERANDA & BOTTOM NAV)
+   ========================================================= */
+
+.app-shell-public {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content-container {
+  flex: 1;
+}
+
+/* Wrapper Beranda Mobile */
+.android-home-wrapper {
+  width: min(1080px, 92%);
+  margin: 0 auto;
+  padding: 18px 0 90px;
+}
+
+/* 1. Header App Bar Android */
+.home-header-android {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.header-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.location-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.location-selector:hover {
+  border-color: var(--primary);
+  background: hsl(222 35% 15%);
+}
+
+.location-pin {
+  font-size: 1.1rem;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.location-subtitle {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.location-current {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+}
+
+.arrow-down {
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-circle-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.icon-circle-btn:hover {
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.unread-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+.user-avatar-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--grad);
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.login-pill-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--grad);
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.header-greeting {
+  margin-top: 16px;
+}
+
+.header-greeting h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.header-greeting p {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+/* Modal Sheet Pilihan Kota */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: hsl(222 60% 3% / 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 120;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-sheet {
+  width: min(480px, 100%);
+  background: var(--card-solid);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  padding: 24px 20px 32px;
+  box-shadow: var(--shadow);
+  animation: fadeUp .25s ease;
+}
+
+.modal-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-sheet-header h3 {
+  font-size: 1.15rem;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.city-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.city-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: hsl(222 40% 9%);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.city-item:hover, .city-item.active {
+  border-color: var(--primary);
+  background: hsl(165 85% 48% / 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.city-item .check {
+  font-weight: 800;
+}
+
+/* Dropdown Notifikasi */
+.notif-dropdown {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  width: min(320px, 90vw);
+  z-index: 100;
+  padding: 14px;
+}
+
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.notif-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notif-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  background: hsl(222 40% 9% / 0.6);
+}
+
+.notif-icon {
+  font-size: 1.2rem;
+}
+
+/* 2. Search Bar Mengambang */
+.home-search-bar-wrap {
+  margin: 14px 0 20px;
+}
+
+.home-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 16px;
+  background: hsl(222 40% 11% / 0.9);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px -5px hsl(222 60% 2% / 0.6);
+  transition: .2s;
+}
+
+.home-search-bar:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.search-icon {
+  font-size: 1.1rem;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.clear-search-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.search-submit-btn {
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: var(--grad);
+  border: none;
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.search-submit-btn:hover {
+  transform: scale(1.02);
+}
+
+/* 3. Promo Carousel */
+.promo-carousel-container {
+  margin-bottom: 22px;
+}
+
+.promo-banner-card {
+  position: relative;
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid hsl(165 70% 45% / 0.3);
+  animation: fadeUp .3s ease;
+}
+
+.banner-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: hsl(0 0% 0% / 0.4);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--primary-2);
+  margin-bottom: 8px;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.banner-texts h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.banner-texts p {
+  font-size: 0.82rem;
+  color: hsl(210 20% 90%);
+  margin: 6px 0 14px;
+  max-width: 320px;
+}
+
+.banner-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: hsl(0 0% 100% / 0.95);
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: .2s;
+}
+
+.banner-cta-btn:hover {
+  background: #fff;
+  transform: translateX(3px);
+}
+
+.banner-illustration {
+  font-size: 3.2rem;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 12px hsl(0 0% 0% / 0.4));
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.dot-pill {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  background: hsl(220 30% 25%);
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.dot-pill.active {
+  width: 32px;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* 4. Quick Actions Grid */
+.quick-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.action-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+.action-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+.action-icon-circle {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: hsl(222 35% 15%);
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  box-shadow: inset 0 1px 1px hsl(0 0% 100% / 0.1);
+}
+
+.action-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--grad);
+  color: hsl(222 47% 8%);
+  font-size: 0.62rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.action-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+}
+
+/* 5. Flash Booking Card */
+.flash-booking-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, hsl(38 95% 58% / 0.12), hsl(165 85% 48% / 0.08));
+  border: 1px solid hsl(38 95% 58% / 0.3);
+  margin-bottom: 26px;
+}
+
+.flash-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: hsl(38 95% 58% / 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.flash-texts {
+  flex: 1;
+}
+
+.flash-texts h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--warning);
+}
+
+.flash-texts p {
+  font-size: 0.78rem;
+  margin-top: 2px;
+}
+
+.flash-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--warning);
+  color: hsl(222 47% 8%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: .15s;
+}
+
+.flash-btn:hover {
+  transform: scale(1.03);
+}
+
+/* 6. Section Block & Sport Categories */
+.home-section-block {
+  margin-bottom: 28px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.section-subtitle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.see-all-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.reset-filter-link {
+  background: transparent;
+  border: none;
+  color: var(--warning);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sport-categories-section {
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sport-categories-section::-webkit-scrollbar {
+  display: none;
+}
+
+.categories-scroll-row {
+  display: flex;
+  gap: 10px;
+}
+
+.sport-chip-android {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s ease;
+  font-size: 0.9rem;
+}
+
+.sport-chip-android:hover {
+  border-color: var(--primary);
+}
+
+.sport-chip-android.active {
+  background: var(--grad);
+  border-color: transparent;
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  box-shadow: 0 4px 16px -2px var(--primary-glow);
+}
+
+/* 7. Venue Cards Android */
+.android-venue-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.venue-card-android {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.venue-card-android:hover {
+  transform: translateY(-4px);
+  border-color: hsl(165 70% 45% / 0.5);
+}
+
+.card-link-wrapper {
+  display: block;
+  color: inherit;
+}
+
+.card-cover-media {
+  position: relative;
+  height: 140px;
+  background: url('/hero.jpg') center/cover;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, hsl(222 47% 6% / 0.4) 0%, hsl(222 47% 6% / 0.85) 100%);
+}
+
+.top-badges {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-verified {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: hsl(165 85% 48% / 0.85);
+  color: hsl(222 47% 8%);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.badge-status {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: hsl(0 0% 0% / 0.6);
+  color: var(--text);
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.sports-emojis {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sport-pill-tag {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: hsl(0 0% 0% / 0.65);
+  backdrop-filter: blur(4px);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.card-info-body {
+  padding: 14px 16px 16px;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.venue-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.rating-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: hsl(38 95% 58% / 0.15);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--warning);
+}
+
+.venue-location-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  margin: 6px 0 10px;
+}
+
+.card-court-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  margin-bottom: 14px;
+}
+
+.card-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.price-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.price-amount {
+  font-size: 1.1rem;
+}
+
+.btn-select-slot {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: var(--grad);
+  color: hsl(222 47% 8%);
+  font-weight: 700;
+  font-size: 0.82rem;
+  transition: transform .15s ease;
+}
+
+.btn-select-slot:hover {
+  transform: translateX(2px);
+}
+
+.empty-android {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.empty-icon {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* 8. Partner Banner */
+.home-partner-cta {
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, hsl(222 35% 15%), hsl(222 40% 9%));
+  border: 1px solid var(--border);
+  margin-top: 10px;
+}
+
+.partner-content h4 {
+  font-size: 1.2rem;
+  margin: 8px 0 4px;
+}
+
+/* =========================================================
+   BOTTOM NAVIGATION BAR (ANDROID STYLE)
+   ========================================================= */
+
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: hsl(222 47% 8% / 0.94);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 99;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.mobile-bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: all .2s ease;
+}
+
+.mobile-bottom-nav .nav-item .icon {
+  font-size: 1.25rem;
+  transition: transform .2s ease;
+}
+
+.mobile-bottom-nav .nav-item:hover {
+  color: var(--text);
+}
+
+.mobile-bottom-nav .nav-item.active {
+  color: var(--primary);
+}
+
+.mobile-bottom-nav .nav-item.active .icon {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px var(--primary-glow));
+}
+
+/* Di layar desktop lebar (> 900px), bottom nav disembunyikan agar tampilan desktop tetap bersih */
+@media (min-width: 901px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+  .android-home-wrapper {
+    padding-bottom: 40px;
+  }
+}
+
