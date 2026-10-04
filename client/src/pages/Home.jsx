@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { api, errMsg } from '../lib.jsx';
 
-// Modular Components bergaya E-Sekolah / Android Mobile Modern
-import HomeHeader from '../components/home/HomeHeader.jsx';
-import QuickStatsRow from '../components/home/QuickStatsRow.jsx';
-import BigActionButtons from '../components/home/BigActionButtons.jsx';
-import BlueGridMenu from '../components/home/BlueGridMenu.jsx';
+// Komponen Bergaya Alfagift Mobile
+import AlfagiftHeader from '../components/home/AlfagiftHeader.jsx';
+import AlfagiftMemberCard from '../components/home/AlfagiftMemberCard.jsx';
+import AlfagiftPromoBanner from '../components/home/AlfagiftPromoBanner.jsx';
+import AlfagiftCategoryGrid from '../components/home/AlfagiftCategoryGrid.jsx';
 import BookingHistorySection from '../components/home/BookingHistorySection.jsx';
+import AlfagiftStickyToast from '../components/home/AlfagiftStickyToast.jsx';
 
 /**
- * Halaman Utama (Beranda) — Tampilan Android Mobile Modern (Identik E-Sekolah)
- * - Header Royal Blue Gradient dengan Profil & Waktu WIB
- * - Kartu Status 4 Kotak (Booking Aktif, Menunggu, Riwayat, Lapangan)
- * - 2 Tombol Besar (Booking Lapang Hijau & Jadwal Main Merah)
- * - 8 Tombol Biru Squircle (Futsal, Badminton, Basket, Padel, Mini Soccer, Mabar, Turnamen, Keuangan)
- * - Daftar Histori Jadwal dengan link 'View All'
+ * Halaman Utama (Beranda) — Versi Alfagift Mobile Pro
+ * - Default Warna: Biru Royal (Dapat diubah bebas lewat tombol 🎨 Palette)
+ * - Header Lokasi, Chat, Notifikasi & Setting Tema
+ * - Search Bar dengan Barcode & Heart Favorite
+ * - Kartu Member Loyalitas (Poin, Voucher, Jam Main, Rating)
+ * - Banner Promo Cashback Geser
+ * - Grid 10 Kategori Olahraga & Layanan (5x2)
+ * - Rekomendasi Lapangan Terdekat
+ * - Sticky Bottom Offer Toast
  */
 export function Home() {
   const [venues, setVenues] = useState([]);
   const [myBookings, setMyBookings] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('Bandung');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,14 +32,16 @@ export function Home() {
     async function fetchData() {
       try {
         setLoading(true);
-        const [venuesRes, bookingsRes] = await Promise.allSettled([
+        const [venuesRes, bookingsRes, citiesRes] = await Promise.allSettled([
           api.get('/venues'),
           api.get('/bookings/me'),
+          api.get('/cities'),
         ]);
 
         if (isMounted) {
           if (venuesRes.status === 'fulfilled') setVenues(venuesRes.value.data || []);
           if (bookingsRes.status === 'fulfilled') setMyBookings(bookingsRes.value.data || []);
+          if (citiesRes.status === 'fulfilled') setCities(citiesRes.value.data || []);
         }
       } catch (err) {
         console.error('Error fetching home data:', errMsg(err));
@@ -46,31 +54,29 @@ export function Home() {
     return () => { isMounted = false; };
   }, []);
 
-  const activeCount = myBookings.filter((b) => ['confirmed', 'paid'].includes(b.status)).length;
-  const pendingCount = myBookings.filter((b) => b.status === 'pending').length;
-
   return (
-    <div className="mobile-app-frame">
-      {/* 1. Header Biru Royal dengan Info Profil & Jam WIB */}
-      <HomeHeader />
+    <div className="alfa-mobile-frame">
+      {/* 1. Header Alfagift: Lokasi, Notif, Palette Tema, Search Bar, Barcode & Wishlist */}
+      <AlfagiftHeader 
+        selectedCity={selectedCity} 
+        onSelectCity={setSelectedCity} 
+        cities={cities}
+      />
 
-      {/* Konten Tengah (Latar Belakang Bersih & Terang) */}
-      <div className="mobile-app-body">
-        {/* 2. Kartu 4 Status Squircle (Menumpuk ke Atas Header) */}
-        <QuickStatsRow 
-          activeBookingsCount={activeCount || 2} 
-          pendingCount={pendingCount || 1} 
+      {/* Konten Utama */}
+      <div className="alfa-body-content">
+        {/* 2. Kartu Member Loyalitas (Poin, Voucher, Alert & Barcode) */}
+        <AlfagiftMemberCard 
+          userBookingsCount={myBookings.length}
         />
 
-        {/* 3. Dua Tombol Aksi Besar (Hijau Booking & Merah Jadwal Main) */}
-        <BigActionButtons 
-          nextSchedule={myBookings[0] ? `${myBookings[0].start_time?.slice(0, 5)} WIB` : '19:00 WIB'}
-        />
+        {/* 3. Hero Promo Banner (Cashback, Diskon, Dot Carousel) */}
+        <AlfagiftPromoBanner />
 
-        {/* 4. Grid 8 Tombol Biru Squircle Ikon Olahraga & Menu */}
-        <BlueGridMenu />
+        {/* 4. Grid 10 Kategori Olahraga & Menu (5 Kolom x 2 Baris) */}
+        <AlfagiftCategoryGrid />
 
-        {/* 5. Histori Booking & Jadwal Terdekat */}
+        {/* 5. Rekomendasi Lapang Terdekat */}
         {loading ? (
           <div className="spinner" style={{ margin: '30px auto' }} />
         ) : (
@@ -80,6 +86,9 @@ export function Home() {
           />
         )}
       </div>
+
+      {/* 6. Banner Sticky Melayang di Atas Navigasi Bawah */}
+      <AlfagiftStickyToast />
     </div>
   );
 }

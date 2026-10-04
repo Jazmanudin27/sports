@@ -3,67 +3,73 @@ import { NavLink } from 'react-router-dom';
 import { useApp } from '../../lib.jsx';
 
 /**
- * BottomNav Component (Floating Curved Capsule E-Sekolah Style)
- * Bar navigasi bawah mengambang dengan Tombol Tengah Menonjol (Center FAB).
+ * BottomNav Component (5 Tab Alfagift Style)
+ * - Beranda
+ * - Lapangan
+ * - Promo
+ * - Pesanan / Booking
+ * - Akun / Profile
  */
 export function BottomNav() {
-  const { user } = useApp();
+  const { user, openThemeModal } = useApp();
   const isStaff = user && user.role !== 'member';
 
   return (
-    <div className="bottom-nav-floating-container">
-      <nav className="bottom-nav-capsule">
+    <div className="alfa-bottom-nav-container">
+      <nav className="alfa-bottom-nav-bar">
         {/* 1. Beranda */}
         <NavLink 
           to="/" 
           end 
-          className={({ isActive }) => `capsule-tab-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
         >
-          <span className="tab-icon">🏠</span>
-          <span className="tab-label">Beranda</span>
+          <span className="tab-glyph">🏠</span>
+          <span className="tab-text">Beranda</span>
         </NavLink>
 
-        {/* 2. Cari / Lapangan */}
+        {/* 2. Lapangan (Belanja) */}
         <NavLink 
           to="/venues" 
-          className={({ isActive }) => `capsule-tab-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
         >
-          <span className="tab-icon">🔍</span>
-          <span className="tab-label">Cari Lapang</span>
+          <span className="tab-glyph">🏟️</span>
+          <span className="tab-text">Lapangan</span>
         </NavLink>
 
-        {/* 3. CENTER FLOATING BUTTON (FAB) */}
-        <div className="center-fab-wrapper">
-          <NavLink to="/venues" className="center-fab-circle" title="Booking Instan">
-            <span className="fab-icon">⚡</span>
-          </NavLink>
-        </div>
+        {/* 3. Promo */}
+        <NavLink 
+          to="/venues?promo=true" 
+          className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
+        >
+          <span className="tab-glyph">🏷️</span>
+          <span className="tab-text">Promo</span>
+        </NavLink>
 
-        {/* 4. Histori / Booking */}
+        {/* 4. Pesanan / Booking */}
         <NavLink 
           to="/my-bookings" 
-          className={({ isActive }) => `capsule-tab-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
         >
-          <span className="tab-icon">🎟️</span>
-          <span className="tab-label">Histori</span>
+          <span className="tab-glyph">📋</span>
+          <span className="tab-text">Pesanan</span>
         </NavLink>
 
-        {/* 5. Profile / Admin */}
+        {/* 5. Akun */}
         {isStaff ? (
           <NavLink 
             to="/admin" 
-            className={({ isActive }) => `capsule-tab-item ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
           >
-            <span className="tab-icon">⚙️</span>
-            <span className="tab-label">Admin</span>
+            <span className="tab-glyph">⚙️</span>
+            <span className="tab-text">Admin</span>
           </NavLink>
         ) : (
           <NavLink 
             to={user ? "/my-bookings" : "/login"} 
-            className={({ isActive }) => `capsule-tab-item ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `alfa-tab-item ${isActive ? 'active' : ''}`}
           >
-            <span className="tab-icon">👤</span>
-            <span className="tab-label">Profile</span>
+            <span className="tab-glyph">👤</span>
+            <span className="tab-text">Akun</span>
           </NavLink>
         )}
       </nav>
