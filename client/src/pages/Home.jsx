@@ -1,48 +1,39 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { api, errMsg } from '../lib.jsx';
 
-// Modular Components
+// Modular Components bergaya E-Sekolah / Android Mobile Modern
 import HomeHeader from '../components/home/HomeHeader.jsx';
-import HomeSearchBar from '../components/home/HomeSearchBar.jsx';
-import PromoCarousel from '../components/home/PromoCarousel.jsx';
-import QuickActionGrid from '../components/home/QuickActionGrid.jsx';
-import SportCategories from '../components/home/SportCategories.jsx';
-import FlashBookingCard from '../components/home/FlashBookingCard.jsx';
-import VenueCardAndroid from '../components/home/VenueCardAndroid.jsx';
+import QuickStatsRow from '../components/home/QuickStatsRow.jsx';
+import BigActionButtons from '../components/home/BigActionButtons.jsx';
+import BlueGridMenu from '../components/home/BlueGridMenu.jsx';
+import BookingHistorySection from '../components/home/BookingHistorySection.jsx';
 
 /**
- * Halaman Beranda (Home Page) — Versi Android / Mobile-First
- * Struktur rapi dan modular agar memudahkan tim programmer untuk maintenance & penambahan fitur.
+ * Halaman Utama (Beranda) — Tampilan Android Mobile Modern (Identik E-Sekolah)
+ * - Header Royal Blue Gradient dengan Profil & Waktu WIB
+ * - Kartu Status 4 Kotak (Booking Aktif, Menunggu, Riwayat, Lapangan)
+ * - 2 Tombol Besar (Booking Lapang Hijau & Jadwal Main Merah)
+ * - 8 Tombol Biru Squircle (Futsal, Badminton, Basket, Padel, Mini Soccer, Mabar, Turnamen, Keuangan)
+ * - Daftar Histori Jadwal dengan link 'View All'
  */
 export function Home() {
-  const navigate = useNavigate();
-
-  // State
-  const [sports, setSports] = useState([]);
   const [venues, setVenues] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedSport, setSelectedSport] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [myBookings, setMyBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. Fetch data awal: Sports, Venues, Cities
   useEffect(() => {
     let isMounted = true;
     async function fetchData() {
       try {
         setLoading(true);
-        const [sportsRes, venuesRes, citiesRes] = await Promise.all([
-          api.get('/sports'),
+        const [venuesRes, bookingsRes] = await Promise.allSettled([
           api.get('/venues'),
-          api.get('/cities'),
+          api.get('/bookings/me'),
         ]);
 
         if (isMounted) {
-          setSports(sportsRes.data || []);
-          setVenues(venuesRes.data || []);
-          setCities(citiesRes.data || []);
+          if (venuesRes.status === 'fulfilled') setVenues(venuesRes.value.data || []);
+          if (bookingsRes.status === 'fulfilled') setMyBookings(bookingsRes.value.data || []);
         }
       } catch (err) {
         console.error('Error fetching home data:', errMsg(err));
@@ -55,142 +46,40 @@ export function Home() {
     return () => { isMounted = false; };
   }, []);
 
-  // 2. Filter Venue berdasarkan Kota & Olahraga yang dipilih di Beranda
-  const filteredVenues = useMemo(() => {
-    return venues.filter((venue) => {
-      // Filter Kota
-      if (selectedCity && venue.city !== selectedCity) return false;
-
-      // Filter Olahraga
-      if (selectedSport) {
-        const sportObj = sports.find((s) => s.id === selectedSport);
-        if (sportObj && !venue.sports?.includes(sportObj.name)) return false;
-      }
-
-      // Filter Search Query
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const matchName = venue.name?.toLowerCase().includes(q);
-        const matchAddress = venue.address?.toLowerCase().includes(q);
-        const matchSports = venue.sports?.toLowerCase().includes(q);
-        if (!matchName && !matchAddress && !matchSports) return false;
-      }
-
-      return true;
-    });
-  }, [venues, selectedCity, selectedSport, searchQuery, sports]);
-
-  // Handler Submit Search
-  const handleSearchSubmit = (e) => {
-    e?.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/venues?q=${encodeURIComponent(searchQuery)}`);
-    }
-  };
+  const activeCount = myBookings.filter((b) => ['confirmed', 'paid'].includes(b.status)).length;
+  const pendingCount = myBookings.filter((b) => b.status === 'pending').length;
 
   return (
-    <div className="android-home-wrapper">
-      {/* 1. App Bar Atas (Lokasi, Profil/Login, Notifikasi, Sapaan) */}
-      <HomeHeader 
-        selectedCity={selectedCity}
-        onSelectCity={setSelectedCity}
-        cities={cities}
-      />
+    <div className="mobile-app-frame">
+      {/* 1. Header Biru Royal dengan Info Profil & Jam WIB */}
+      <HomeHeader />
 
-      {/* 2. Search Bar Mengambang */}
-      <HomeSearchBar 
-        value={searchQuery}
-        onChange={setSearchQuery}
-        onSubmit={handleSearchSubmit}
-      />
-
-      {/* 3. Promo & Event Carousel (Banner Geser) */}
-      <PromoCarousel />
-
-      {/* 4. Fitur Cepat (Sewa, Mabar, Turnamen, Promo) */}
-      <QuickActionGrid />
-
-      {/* 5. Flash Booking Widget (Slot Kosong Hari Ini) */}
-      <FlashBookingCard venueCount={filteredVenues.length} />
-
-      {/* 6. Kategori Olahraga (Futsal, Badminton, Basket, Padel, dll) */}
-      <section className="home-section-block">
-        <div className="section-title-row">
-          <div>
-            <h3 className="section-title">Pilih Olahraga</h3>
-            <p className="section-subtitle">Temukan fasilitas sesuai cabang favoritmu</p>
-          </div>
-          {selectedSport && (
-            <button 
-              type="button" 
-              className="reset-filter-link"
-              onClick={() => setSelectedSport(null)}
-            >
-              Reset ✕
-            </button>
-          )}
-        </div>
-
-        <SportCategories 
-          sports={sports} 
-          activeSportId={selectedSport}
-          onSelectSport={setSelectedSport}
+      {/* Konten Tengah (Latar Belakang Bersih & Terang) */}
+      <div className="mobile-app-body">
+        {/* 2. Kartu 4 Status Squircle (Menumpuk ke Atas Header) */}
+        <QuickStatsRow 
+          activeBookingsCount={activeCount || 2} 
+          pendingCount={pendingCount || 1} 
         />
-      </section>
 
-      {/* 7. Rekomendasi Venue Lapangan */}
-      <section className="home-section-block">
-        <div className="section-title-row">
-          <div>
-            <h3 className="section-title">
-              {selectedCity ? `Venue di ${selectedCity}` : 'Rekomendasi Venue'}
-            </h3>
-            <p className="section-subtitle">Tersedia {filteredVenues.length} venue pilihan</p>
-          </div>
-          <Link to="/venues" className="see-all-link">
-            Lihat Semua →
-          </Link>
-        </div>
+        {/* 3. Dua Tombol Aksi Besar (Hijau Booking & Merah Jadwal Main) */}
+        <BigActionButtons 
+          nextSchedule={myBookings[0] ? `${myBookings[0].start_time?.slice(0, 5)} WIB` : '19:00 WIB'}
+        />
 
-        {/* Loading Spinner */}
+        {/* 4. Grid 8 Tombol Biru Squircle Ikon Olahraga & Menu */}
+        <BlueGridMenu />
+
+        {/* 5. Histori Booking & Jadwal Terdekat */}
         {loading ? (
-          <div className="spinner" />
-        ) : filteredVenues.length > 0 ? (
-          <div className="android-venue-list">
-            {filteredVenues.map((venue) => (
-              <VenueCardAndroid key={venue.id} venue={venue} />
-            ))}
-          </div>
+          <div className="spinner" style={{ margin: '30px auto' }} />
         ) : (
-          <div className="card empty-android">
-            <span className="empty-icon">🏟️</span>
-            <h4>Tidak ada venue ditemukan</h4>
-            <p className="muted">Coba ganti pilihan kota atau reset filter kategori olahraga.</p>
-            <button 
-              type="button" 
-              className="btn btn-sm btn-primary"
-              style={{ marginTop: 12 }}
-              onClick={() => { setSelectedCity(''); setSelectedSport(null); setSearchQuery(''); }}
-            >
-              Reset Semua Filter
-            </button>
-          </div>
+          <BookingHistorySection 
+            bookings={myBookings} 
+            venues={venues} 
+          />
         )}
-      </section>
-
-      {/* 8. Banner Ajakan Jadi Mitra Lapang */}
-      <section className="home-partner-cta card">
-        <div className="partner-content">
-          <span className="badge-pill">💼 Pemilik Lapangan?</span>
-          <h4>Kelola Sport Center Lebih Praktis</h4>
-          <p className="muted">
-            Catat keuangan, kelola jadwal sewa per jam, dan pantau booking secara real-time.
-          </p>
-          <Link to="/login" className="btn btn-sm btn-primary" style={{ marginTop: 12, display: 'inline-flex' }}>
-            Masuk Sebagai Pengelola
-          </Link>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

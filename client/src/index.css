@@ -1065,13 +1065,675 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; margin-top: 60px;
   filter: drop-shadow(0 0 6px var(--primary-glow));
 }
 
-/* Di layar desktop lebar (> 900px), bottom nav disembunyikan agar tampilan desktop tetap bersih */
-@media (min-width: 901px) {
-  .mobile-bottom-nav {
-    display: none;
-  }
-  .android-home-wrapper {
-    padding-bottom: 40px;
+/* =========================================================
+   E-SEKOLAH / ANDROID MOBILE MODERN UI (EXACT MATCH)
+   ========================================================= */
+
+/* Mobile Frame Container (Responsif: Fullscreen di HP, Centered Frame di Desktop) */
+.mobile-app-frame {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f1f5f9;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 500px) {
+  .mobile-app-frame {
+    max-width: 100%;
+    box-shadow: none;
   }
 }
+
+/* 1. Header Biru Royal Gradient */
+.esekolah-header-wrapper {
+  background: linear-gradient(165deg, #0747da 0%, #0056fb 50%, #0066ff 100%);
+  padding: 24px 18px 46px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 80, 240, 0.25);
+}
+
+.esekolah-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.app-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  font-size: 1.3rem;
+  background: rgba(255, 255, 255, 0.18);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.pro-badge-pill {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+.top-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border: none;
+  transition: transform .15s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.action-icon-circle:hover {
+  transform: scale(1.06);
+}
+
+.notif-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-count-red {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 17px;
+  height: 17px;
+  background: #ef4444;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.62rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  border: 2px solid #0056fb;
+}
+
+.exit-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+
+/* User Profile Row */
+.user-profile-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar-squircle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: #1e5bff;
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.avatar-initials {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.online-indicator-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2.5px solid #0056fb;
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.greeting-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.user-fullname {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  margin: 2px 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 270px;
+}
+
+.date-time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: fit-content;
+}
+
+/* Notif Popup */
+.notif-popup-card {
+  position: absolute;
+  top: 70px;
+  right: 18px;
+  width: 280px;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 14px;
+  z-index: 100;
+  animation: fadeUp .2s ease;
+}
+
+.notif-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.notif-popup-header button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.notif-popup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notif-popup-item {
+  display: flex;
+  gap: 10px;
+  font-size: 0.78rem;
+}
+
+.notif-popup-item span {
+  font-size: 1.2rem;
+}
+
+.notif-popup-item p {
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* 2. Body Konten Mobile */
+.mobile-app-body {
+  padding: 0 16px 110px;
+  flex: 1;
+}
+
+/* 3. Kartu Status 4 Kotak (Menumpuk Ke Atas Header) */
+.quick-stats-card-sheet {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 16px 12px;
+  box-shadow: 0 8px 24px rgba(0, 50, 160, 0.08);
+  margin-top: -28px;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 14px;
+}
+
+.quick-stats-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stat-item-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.stat-squircle-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  transition: transform .2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.stat-item-link:hover .stat-squircle-icon {
+  transform: translateY(-2px);
+}
+
+.stat-green {
+  background: #10b981;
+}
+
+.stat-red {
+  background: #ef4444;
+}
+
+.stat-orange {
+  background: #f59e0b;
+}
+
+.stat-teal {
+  background: #06b6d4;
+}
+
+.emoji-icon {
+  font-size: 1.4rem;
+}
+
+.stat-badge-counter {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid #ffffff;
+}
+
+.stat-item-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+/* 4. Dua Tombol Aksi Besar (Hijau & Merah) */
+.dual-big-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.big-action-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform .2s ease;
+}
+
+.big-action-card:hover {
+  transform: translateY(-2px);
+}
+
+.card-green {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3);
+}
+
+.card-red {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
+}
+
+.big-icon-bubble {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.22);
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.big-action-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.action-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.action-subtitle {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 3px;
+}
+
+/* 5. The Signature 8 Blue Squircle Grid */
+.blue-menu-grid-wrapper {
+  margin-bottom: 22px;
+}
+
+.blue-menu-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px 10px;
+}
+
+.blue-menu-item-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+}
+
+.blue-squircle-button {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #0066ff, #0052cc);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 18px rgba(0, 102, 255, 0.3);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.blue-menu-item-link:hover .blue-squircle-button {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(0, 102, 255, 0.45);
+}
+
+.menu-icon-emoji {
+  font-size: 1.55rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.blue-menu-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+  letter-spacing: -0.2px;
+}
+
+/* 6. Histori Absensi / Booking Section */
+.history-section-wrapper {
+  margin-bottom: 20px;
+}
+
+.history-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.history-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+}
+
+.view-all-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0066ff;
+  text-decoration: none;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+.history-list-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history-card-item {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 14px rgba(0, 30, 90, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease;
+}
+
+.history-card-item:hover {
+  transform: translateY(-2px);
+}
+
+.history-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.history-sport-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #f1f5f9;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.history-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.venue-name-bold {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.court-and-date {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin: 2px 0 4px;
+}
+
+.booking-time-badge {
+  font-size: 0.7rem;
+  color: #0066ff;
+  font-weight: 600;
+}
+
+.history-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.status-pill {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.price-tag-sm {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* 7. Floating Curved Bottom Nav Capsule */
+.bottom-nav-floating-container {
+  position: fixed;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.bottom-nav-capsule {
+  pointer-events: auto;
+  width: min(440px, 92%);
+  height: 64px;
+  background: #ffffff;
+  border-radius: 36px;
+  box-shadow: 0 12px 35px rgba(0, 30, 90, 0.16);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  position: relative;
+}
+
+.capsule-tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  transition: all .2s ease;
+  width: 60px;
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+  transition: transform .2s ease;
+}
+
+.capsule-tab-item.active {
+  color: #0066ff;
+}
+
+.capsule-tab-item.active .tab-icon {
+  transform: scale(1.1);
+}
+
+/* Center Floating Action Button (FAB) */
+.center-fab-wrapper {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin-top: -28px;
+}
+
+.center-fab-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #0066ff, #004ecc);
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.45);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  transition: transform .2s ease;
+}
+
+.center-fab-circle:hover {
+  transform: scale(1.08);
+}
+
+.fab-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Sembunyikan desktop navbar default di halaman mobile jika sedang di viewport mobile */
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+}
+
 
